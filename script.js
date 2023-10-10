@@ -147,10 +147,10 @@ $(document).ready(function () {
 
             // Create a filter element and add it to the filter container with the unique ID
             const filterElement = `
-                <div class="sc-bkbkJK eraKfR" id="${filterId}">
-                    <div class="sc-dlMDgC kpPvTx">
+                <div class="filter-box" id="${filterId}">
+                    <div class="filter-name">
                         <span class="sc-kfYoZR lpaEYv">${filterText}</span>
-                        <button class="sc-fKgJPI dBFPDH" data-filter-id="${filterId}">
+                        <button class="filter-remove" data-filter-id="${filterId}">
                             <img src="./images/icon-remove.svg" alt="remove filter">
                         </button>
                     </div>
@@ -172,8 +172,8 @@ $(document).ready(function () {
         }
       }
 
-      // Add an event listener to buttons with class 'sc-fKgJPI dBFPDH' (for removing filters)
-      $(document).on("click", ".sc-fKgJPI.dBFPDH", function () {
+      // Add an event listener to buttons with class 'sc-fKgJPI filter-remove' (for removing filters)
+      $(document).on("click", ".sc-fKgJPI.filter-remove", function () {
         const filterIdToRemove = $(this).data("filter-id");
         $(`#${filterIdToRemove}`).remove();
 
