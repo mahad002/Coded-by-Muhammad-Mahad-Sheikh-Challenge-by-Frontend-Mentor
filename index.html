@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Job Listings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+    .Outbox {
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px; 
+    }
+    div {
+      display: block;
+    }
+
+    * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+      font-family: var(--ff-brand);
+    }
+
+    :root {
+        --desaturated-dark-cyan: hsl(180,29%,50%);
+        --light-grayish-cyan-background: hsl(180,52%,96%);
+        --light-grayish-cyan-filter-pill: hsl(180,31%,95%);
+        --dark-grayish-cyan: hsl(180,8%,52%);
+        --very-dark-grayish-cyan: hsl(180,14%,20%);
+        --ff-brand: 'Spartan',sans-serif;
+        --fs-global: 0.97em;
+        --fw-normal: 500;
+        --fw-bold: 700;
+        --box-shadow: 0px 8px 24px rgba(91,164,164,0.25);
+        --timing-cubic: cubic-bezier(0.175,0.885,0.32,1.275);
+    }
+
+    :root {
+        view-transition-name: root;
+    }
+
+    .Inbox{
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .Inbox:hover{
+      border-left: 4px solid rgb(91, 129, 199);
+    }
+
+    .dIkLKu {
+      overflow: hidden;
+      background: rgb(91, 164, 164);  
+    }
+
+    
+    .kWHHQy {
+      background: rgb(239, 250, 250);
+      transition: all 0.2s ease-out 0s;
+    }
+
+    @media screen and (max-width: 1000px){
+    .gfuSqG {
+        padding: 2.78em 1.67em;
+    }}
+    
+    .gfuSqG {
+        width: 100%;
+        height: 100%;
+        padding: 5.56% 11.11%;
+    }
+
+    @media screen and (max-width: 789px){
+    .geNaqG {
+        margin-top: -6em;
+        font-size: 0.83em;
+        margin-bottom: 3.5em;
+    }}
+
+    @media screen and (max-width: 1000px){
+    .geNaqG {
+        margin-top: -5.5em;
+        padding: 0.42em 0.84em;
+    }}
+
+    .geNaqG {
+        width: 100%;
+        min-height: 5.3em;
+        background: rgb(255, 255, 255);
+        box-shadow: none;
+        margin-bottom: 2.78em;
+        border-radius: 0.5em;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 0.83em 1.39em;
+        margin-top: -8.3em;
+        position: sticky;
+        top: 1.67em;
+        z-index: 2;
+    }
+
+    .eraKfR {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    @media screen and (max-width: 1000px){
+      .ccTnQh {
+          left: 0.84em;
+      }
+    }
+
+    .ccTnQh {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 1.39em;
+        color: var(--desaturated-dark-cyan);
+        opacity: 0.5;
+        font-size: var(--fs-global);
+        font-weight: var(--fw-bold);
+    }
+    
+    p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+    
+    .jstifX {
+        width: 500px;
+        padding: 0.28em 0px;
+        border: none;
+        outline: none;
+        font-size: var(--fs-global);
+        color: var(--desaturated-dark-cyan);
+        font-weight: var(--fw-bold);
+        background: rgb(255, 255, 255);
+    }
+    
+    input[type="text" i] {
+      padding-block: 1px;
+      padding-inline: 2px;
+    }
+
+    input:not([type="file" i], [type="image" i], [type="checkbox" i], [type="radio" i]) {
+
+    }
+
+    .biCrYn {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--desaturated-dark-cyan);
+        text-decoration: underline;
+        font-weight: var(--fw-bold);
+        font-size: 0.9em;
+        opacity: 0.5;
+        transition: all 0.2s var(--timing-cubic);
+    }
+
+    .job-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right:10px ;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .job-popup-content {
+      background-color: rgb(189, 195, 245);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      max-width: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .job-object {
+      background: rgb(255, 255, 255);
+      padding: 2.22em 2.78em;
+      border-radius: 0.5em;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      margin-bottom: 1.67em;
+      box-shadow: none;
+      animation: jsMLnZ 0.2s var(--timing-cubic) forwards;
+      border-left: 0.35em solid var(--desaturated-dark-cyan);
+    }
+
+    @media screen and (max-width: 789px){
+    .job-object {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.67em;
+        margin-bottom: 2.78em;
+    }}
+
+    /* @media screen and (max-width: 1000px){
+    .job-object {
+        align-items: flex-end;
+    }} */
+
+    .remove-button {
+      display: none; 
+      font-size: var(--fs-global);
+      color: rgb(248, 51, 71);
+      background: rgb(238, 246, 246);
+      padding: 0.56em;
+      margin-left: 0.56em;
+      border-radius: 0.3em;
+      outline: none;
+      border: none;
+      font-weight: var(--fw-bold);
+      transition: all 0.2s var(--timing-cubic);
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .job-object:hover {
+      background: url('./images/job-listing-background.png') rgba(0, 0, 0, 0.7) no-repeat center center;
+      background-size: cover;
+    }
+
+    .job-object:hover .remove-button {
+      display: block;
+    }
+
+    .float {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      bottom: 0;
+      right: 0;
+      margin: 35px 25px;
+    }
+    .float:hover {
+      height: 300px;
+    }
+    .float:hover .my-float {
+      box-shadow: 0 10px 25px rgba(44, 179, 240, 0.6);
+      -webkit-transform: translatey(5px);
+              transform: translatey(5px);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    .float .my-float {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      background: #2cb3f0;
+      bottom: 0;
+      border-radius: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      color: white;
+      line-height: 65px;
+      text-align: center;
+      font-size: 23px;
+      z-index: 100;
+      box-shadow: 0 10px 25px -5px rgba(44, 179, 240, 0.6);
+      cursor: pointer;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+
+    @media screen and (max-width: 789px){
+    .job-object-side2 {
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+        margin-top: 1.39em;
+        padding-top: 0.56em;
+        border-top: 0.07em solid var(--very-dark-grayish-cyan);
+    }}
+
+    @media screen and (max-width: 1000px){
+    .job-object-side2 {
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+    }}
+
+
+   
+
+    .job-object-side .job-object-side2{
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    
+    @media screen and (max-width: 789px){
+    .job-object-left-desc {
+        margin-top: 1.11em;
+    }}
+
+    @media screen and (max-width: 1000px){
+    .job-object-left-desc {
+        margin-left: 0px;
+        margin-top: 1.67em;
+        width: 100%;
+    }}
+    .job-object-left-desc {
+        margin-left: 1.67em;
+    }
+
+    @media screen and (max-width: 789px){
+    .position {
+        font-size: 1.11em;
+    }
+    .company {
+        font-size: 0.83em;
+    }}
+    .company {
+        font-size: var(--fs-global);
+        font-weight: var(--fw-bold);
+        color: var(--desaturated-dark-cyan);
+        display: inline;
+    }
+
+    @media screen and (max-width: 789px){
+    .new {
+        font-size: 0.56em;
+    }}
+    .new {
+        padding: 0.69em 0.69em 0.42em;
+        background: var(--desaturated-dark-cyan);
+        color: white;
+        border-radius: 100vw;
+        margin-left: 1.11em;
+        text-transform: uppercase;
+        font-size: 0.69em;
+        font-weight: var(--fw-bold);
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 789px){
+      .featured{
+        font-size: 0.56em;
+      }
+    }
+
+    .featured {
+         padding: 0.69em 0.69em 0.42em;
+        color: white;
+        border-radius: 100vw;
+        margin-left: 1.11em;
+        text-transform: uppercase;
+        font-size: 0.69em;
+        font-weight: var(--fw-bold);
+        cursor: pointer;
+        background: var(--very-dark-grayish-cyan);
+    }
+
+    @media screen and (max-width: 789px){
+    .position {
+        font-size: 0.97em;
+        margin: 0.8em 0px;
+    }}
+    .position {
+        color: rgb(28, 29, 29);
+        margin: 0.8em 0px 0.6em;
+        transition: all 0.2s var(--timing-cubic);
+        cursor: pointer;
+    }
+    @media screen and (max-width: 789px)
+    {.about {
+        font-size: 12px;
+    }}
+    @media screen and (min-width: 789px)
+    {.about {
+        font-size: 0.97em;
+    }}
+
+    .about {
+        color: var(--dark-grayish-cyan);
+    }
+    @media screen and (max-width: 789px)
+    {.DykGo {
+        width: 90%;
+    }}
+    @media screen and (max-width: 1000px)
+    {.DykGo {
+        width: 85%;
+    }}
+    .DykGo {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    .dot {
+        width: 0.2em;
+        height: 0.2em;
+        margin: 0px 0.8em;
+        border-radius: 100vw;
+        background: var(--dark-grayish-cyan);
+    }
+
+    .dynamicContent{
+        width: 100%;
+        height: 100%;
+        padding: 5.56% 11.11%;
+    }
+
+
+    @media screen and (max-width: 789px){
+    .button-rll {
+        margin: 1.11em 1.11em 0px 0px;
+        font-size: 0.83em;
+    }}
+    @media screen and (min-width: 789px){
+    .button-rll {
+        font-size: var(--fs-global);
+    }}
+
+    @media screen and (max-width: 1000px){
+      .button-rll {
+        margin: 0.56em 0.56em 0px;
+    }}
+
+    .button-rll {
+        color: rgb(91, 164, 164);
+        background: rgb(238, 246, 246);
+        padding: 0.56em;
+        margin-left: 0.56em;
+        border-radius: 0.3em;
+        outline: none;
+        border: none;
+        font-weight: var(--fw-bold);
+        transition: all 0.2s var(--timing-cubic);
+        cursor: pointer;
+    }
+
+    .attribution{
+      padding-bottom: 5%;
+    }
+
+    /* @media screen and (max-width: 789px){
+    .hFalHO {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.67em;
+        margin-bottom: 2.78em;
+    }}
+    @media screen and (min-width: 789px){
+    .hFalHO {
+        align-items: flex-end;
+    }}
+
+    .hFalHO {
+        background: rgb(255, 255, 255);
+        padding: 2.22em 2.78em;
+        border-radius: 0.5em;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        margin-bottom: 1.67em;
+        box-shadow: none;
+        animation: jsMLnZ 0.2s var(--timing-cubic) forwards;
+    } */
+
+    @media screen and (max-width: 789px){
+      .circular-avatar {
+          width: 3.33em;
+          height: 3.33em;
+          margin-top: -3.4em;
+      }
+    }
+
+    @media screen and (min-width: 789px){
+      .circular-avatar {
+          width: 6.11em;
+          height: 6.11em;
+      }
+    }
+
+    .circular-avatar {
+        border-radius: 100vw; 
+    }
+
+    img {
+        overflow-clip-margin: content-box;
+        overflow: clip;
+    }
+
+    @media screen and (max-width: 1000px){
+    .dJXsSm {
+        height: 1.2em;
+    }}
+    
+    .dJXsSm {
+        width: 100%;
+        height: 11.11em;
+        object-fit: cover;
+        transform: scale(1.1);
+    }
+
+    body{
+      display: block;
+    }
+
+    @media screen and (max-width: 1000px){
+    html {
+        font-size: var(---fs-global);
+    }}
+
+    @media screen and (min-width: 1000px){
+    html {
+        font-size: 1vw;
+    }}
+
+    html {
+        display: block;
+        font-weight: var(--fw-normal);
+        overflow-y: scroll;
+        background: rgb(239, 250, 250);
+    }
+
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* CSS for the form popup */
+    .form-popup {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      z-index: 9999;
+    }
+
+    .form-popup-content {
+      background-color: #fff;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Add more CSS styles for form fields, labels, buttons, etc. as needed */
+
+    /* Optional: Style for checkboxes */
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    /* Optional: Style for multiselect select boxes */
+    select[multiple] {
+      height: auto;
+    }
+
+    .kpPvTx {
+        display: flex;
+        overflow: hidden;
+        margin: 0.56em;
+        animation: epSIS 0.2s var(--timing-cubic) forwards;
+    }
+
+
+
+  </style>
+</head>
+<body>
+ 
+  <div id = "root">
+    <section class="kWHHQy">
+      <div class="dIkLKu">
+        <img src="./images/bg-header-desktop.svg" alt="decorated image" class="dJXsSm">
+      </div>
+      
+    </section>
+    
+    <section class=" kWHHQy">
+      
+      <div class=" gfuSqG">
+        <div class="geNaqG">
+          <div class="eraKfR"></div>
+          <p class="sc-hHEiqL ccTnQh">Search your dream job...</p>
+          <input type="text" autocomplete="off" size="1" class="sc-iemWCZ jstifX" value="">
+          <button class="sc-dIvrsQ biCrYn">Clear</button>
+        </div>
+        <div id="dynamicContent"></div>
+      </div>
+      <div class="float">
+        <div class="fa fa-plus my-float" style="font-size:20px" id="add-job-button"></div>
+      </div>
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+        Coded by <a href="#">Muhammad Mahad Sheikh</a>.
+      </div>
+    </section>
+    
+  </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+ <!-- <div id = "root">
+    <section>
+      <div class="nav1">
+        <img src="./images/bg-header-desktop.svg" alt="decorated image" class="sc-dlnjwi dJXsSm">
+        <button title="Theme Toggler" class="sc-eCApnc fASMHS">
+          <span class="sc-jSFjdj jcTaHb">
+            🌜
+          </span>
+        </button>
+      </div>
+    </section>
+    <section class="sc-bdnxRM kWHHQy">
+      <div class="sc-gtsrHT gfuSqG">
+        <div class="sc-fFSPTT geNaqG">
+          <div class="sc-bkbkJK eraKfR"></div>
+          <p class="sc-hHEiqL ccTnQh">Search your dream job...</p>
+          <input type="text" autocomplete="off" size="1" class="sc-iemWCZ jstifX" value="">
+          <button class="sc-dIvrsQ biCrYn">
+            Clear
+          </button>
+        </div>
+        <div class="sc-iCoGMd job-object">
+          <div class="sc-fujyAs job-object-side">
+            <img src="https://i.ibb.co/XyCMjgw/photosnap.png" alt="Photosnap Logo" class="sc-jrsJWt circular-avatar">
+            <div class="sc-pNWdM job-object-left-desc">
+              <h2 class="sc-kEqXSa company">
+                Photosnap
+              </h2>
+              <span class="sc-hBMUJo new">
+                New!
+              </span>
+              <span class="sc-hBMUJo sc-fnVZcZ new featured">
+                Featured
+              </span>
+              <h3 class="sc-iqAclL position">
+                Senior Frontend Developer
+              </h3>
+              <div class="sc-crzoAE DykGo">
+                <span class="sc-dIsUp about">
+                  1d ago
+                </span>
+                <div class="sc-bqGGPW dot">
+
+                </div>
+                <span class="sc-dIsUp about">
+                  Full Time
+                </span>
+                <div class="sc-bqGGPW dot">
+
+                </div>
+                <span class="sc-dIsUp about">
+                  USA Only
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-fujyAs job-object-side">
+            <button class="sc-ksluID button-rll">
+              Frontend
+            </button>
+            <button class="sc-kluID button-rll">
+              Senior
+            </button>
+            <button class="sc-ksluID button-rll">
+              HTML
+            </button>
+            <button class="sc-ksluID button-rll">
+              CSS
+            </button>
+            <button class="sc-ksluID button-rll">
+              JavaScript
+            </button>
+          </div>
+        </div>
+        <div class="sc-iCoGMd job-object">
+          <div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/cDKpYwj/manage.png" alt="Manage Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Manage</h2><span class="sc-hBMUJo new">New!</span><span class="sc-hBMUJo sc-fnVZcZ new featured">Featured</span><h3 class="sc-iqAclL position">Fullstack Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">1d ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Part Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Remote</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Fullstack</button><button class="sc-ksluID button-rll">Midweight</button><button class="sc-ksluID button-rll">Python</button><button class="sc-ksluID button-rll">React</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/n3wcHth/account.png" alt="Account Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Account</h2><span class="sc-hBMUJo new">New!</span><h3 class="sc-iqAclL position">Junior Frontend Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">2d ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Part Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">USA Only</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Frontend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">React</button><button class="sc-ksluID button-rll">Sass</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/hZpvng1/myhome.png" alt="MyHome Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">MyHome</h2><h3 class="sc-iqAclL position">Junior Frontend Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">5d ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Contract</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">USA Only</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Frontend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">CSS</button><button class="sc-ksluID button-rll">JavaScript</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/2cD647y/loop-studios.png" alt="Loop Studios Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Loop Studios</h2><h3 class="sc-iqAclL position">Software Engineer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">1w ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Full Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Worldwide</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Fullstack</button><button class="sc-ksluID button-rll">Midweight</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">Ruby</button><button class="sc-ksluID button-rll">Sass</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/G0NkcNY/faceit.png" alt="FaceIt Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">FaceIt</h2><h3 class="sc-iqAclL position">Junior Backend Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">2w ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Full Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">UK Only</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Backend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">Ruby</button><button class="sc-ksluID button-rll">RoR</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/xS2BB04/shortly.png" alt="Shortly Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Shortly</h2><h3 class="sc-iqAclL position">Junior Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">2w ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Full Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Worldwide</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Frontend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">HTML</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">Sass</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/bBTm25V/insure.png" alt="Insure Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Insure</h2><h3 class="sc-iqAclL position">Junior Frontend Developer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">2w ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Full Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">USA Only</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Frontend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">Vue</button><button class="sc-ksluID button-rll">Sass</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/jTK0HRz/eyecam-co.png" alt="Eyecam Co. Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">Eyecam Co.</h2><h3 class="sc-iqAclL position">Full Stack Engineer</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">3w ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Full Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Worldwide</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Fullstack</button><button class="sc-ksluID button-rll">Midweight</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">Python</button><button class="sc-ksluID button-rll">Django</button></div></div><div class="sc-iCoGMd hFalHO"><div class="sc-fujyAs job-object-side"><img src="https://i.ibb.co/7Cs5gWY/the-air-filter-company.png" alt="The Air Filter Company Logo" class="sc-jrsJWt circular-avatar"><div class="sc-pNWdM job-object-left-desc"><h2 class="sc-kEqXSa company">The Air Filter Company</h2><h3 class="sc-iqAclL position">Front-end Dev</h3><div class="sc-crzoAE DykGo"><span class="sc-dIsUp about">1mo ago</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Part Time</span><div class="sc-bqGGPW dot"></div><span class="sc-dIsUp about">Worldwide</span></div></div></div><div class="sc-fujyAs job-object-side"><button class="sc-ksluID button-rll">Frontend</button><button class="sc-ksluID button-rll">Junior</button><button class="sc-ksluID button-rll">JavaScript</button><button class="sc-ksluID button-rll">React</button><button class="sc-ksluID button-rll">Sass</button></div></div></div></section>
+  
+  </div> -->
+  
