@@ -67,6 +67,10 @@
       background: rgb(239, 250, 250);
       transition: all 0.2s ease-out 0s;
     }
+  
+    section {
+        display: block;
+    }
 
     @media screen and (max-width: 1000px){
     .gfuSqG {
@@ -155,10 +159,6 @@
       padding-inline: 2px;
     }
 
-    input:not([type="file" i], [type="image" i], [type="checkbox" i], [type="radio" i]) {
-
-    }
-
     .biCrYn {
         margin-left: auto;
         background: none;
@@ -207,6 +207,7 @@
     }
     
     .job-object {
+      position: relative;
       background: rgb(255, 255, 255);
       padding: 2.22em 2.78em;
       border-radius: 0.5em;
@@ -219,6 +220,7 @@
       box-shadow: none;
       animation: jsMLnZ 0.2s var(--timing-cubic) forwards;
       border-left: 0.35em solid var(--desaturated-dark-cyan);
+      transition: background 0.3s ease;
     }
 
     @media screen and (max-width: 789px){
