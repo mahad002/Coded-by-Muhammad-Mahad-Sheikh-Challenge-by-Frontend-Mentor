@@ -124,6 +124,15 @@ $(document).ready(function () {
 
       const dynamicContent = $("#dynamicContent");
 
+      // Add a click event listener to the "Clear" button
+      $(".clear-filter").click(function () {
+        // Empty the filter container
+        $(".filter-container").empty();
+
+        // After clearing the filter, reapply the job listing filters
+        filterJobListings();
+    });
+
       let filterIdCounter = 0; // Initialize a counter for unique filter IDs
 
       // Add a click event listener to buttons with class 'button-rll'

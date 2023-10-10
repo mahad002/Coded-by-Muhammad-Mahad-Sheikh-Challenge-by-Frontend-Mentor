@@ -159,7 +159,7 @@
       padding-inline: 2px;
     }
 
-    .biCrYn {
+    .clear-filter {
         margin-left: auto;
         background: none;
         border: none;
@@ -572,14 +572,10 @@
       cursor: pointer;
     }
 
-    /* Add more CSS styles for form fields, labels, buttons, etc. as needed */
-
-    /* Optional: Style for checkboxes */
     input[type="checkbox"] {
       margin-right: 5px;
     }
 
-    /* Optional: Style for multiselect select boxes */
     select[multiple] {
       height: auto;
     }
@@ -636,6 +632,22 @@
         height: 0.8em;
     }
 
+    .clear-filter:hover {
+        opacity: 1;
+    }
+
+    .clear-filter {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--desaturated-dark-cyan);
+        text-decoration: underline;
+        font-weight: var(--fw-bold);
+        font-size: 0.9em;
+        opacity: 0.5;
+        transition: all 0.2s var(--timing-cubic);
+    }
+
 
   </style>
 </head>
@@ -655,7 +667,7 @@
         <div class="search-bar">
           <div class="filter-container"></div>
           <input type="text" autocomplete="off" size="1" class="filter-search" value="">
-          <button class="sc-dIvrsQ biCrYn">Clear</button>
+          <button class="clear-filter">Clear</button>
         </div>
         <div id="dynamicContent"></div>
       </div>
