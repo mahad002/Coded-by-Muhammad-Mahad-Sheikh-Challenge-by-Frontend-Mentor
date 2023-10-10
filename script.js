@@ -17,6 +17,7 @@ $(document).ready(function () {
                   });
               }
 
+
               // Create elements for job details
               const leftDiv = $("<div>").addClass("job-object-side");
 
@@ -146,10 +147,10 @@ $(document).ready(function () {
 
             // Create a filter element and add it to the filter container with the unique ID
             const filterElement = `
-                <div class="eraKfR" id="${filterId}">
-                    <div class="kpPvTx">
-                        <span class="lpaEYv">${filterText}</span>
-                        <button class="dBFPDH" data-filter-id="${filterId}">
+                <div class="sc-bkbkJK eraKfR" id="${filterId}">
+                    <div class="sc-dlMDgC kpPvTx">
+                        <span class="sc-kfYoZR lpaEYv">${filterText}</span>
+                        <button class="sc-fKgJPI dBFPDH" data-filter-id="${filterId}">
                             <img src="./images/icon-remove.svg" alt="remove filter">
                         </button>
                     </div>
@@ -240,7 +241,7 @@ $(document).ready(function () {
 
       // Define a function to create a job object container based on jobData
       function createJobObjectContainer(job) {
-        const container = $("<div>").addClass("job-object");
+              const container = $("<div>").addClass("job-object");
 
               // Check if the job is both new and featured
               const isNewAndFeatured = job.new && job.featured;
@@ -252,6 +253,7 @@ $(document).ready(function () {
                       "transition": "background 0.3s ease"
                   });
               }
+
 
               // Create elements for job details
               const leftDiv = $("<div>").addClass("job-object-side");
