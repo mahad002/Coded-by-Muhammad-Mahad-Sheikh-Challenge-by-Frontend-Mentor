@@ -16,7 +16,7 @@ $(document).ready(function () {
               const companyName = $("<h2>").addClass("company").text(job.company);
 
               const isNew = $("<span>").addClass("new").text("New!");
-              if (!job.new) isNew.hide();
+              if (!job.new) isNew.hide(); 
 
               const isFeatured = $("<span>").addClass("featured").text("Featured");
               if (!job.featured) isFeatured.hide();
@@ -114,80 +114,91 @@ $(document).ready(function () {
 
       let filterIdCounter = 0; // Initialize a counter for unique filter IDs
 
-      // Function to handle adding filters
-      function addFilter(filterText) {
-        const filterContainer = $(".filter-container");
-
-        // Check if the filter already exists in the filter container
-        const existingFilters = filterContainer.find(".sc-kfYoZR").map(function () {
-          return $(this).text();
-        }).get();
-
-        if (!existingFilters.includes(filterText)) {
-          // Generate a unique filter ID
-          const filterId = `filter-${filterIdCounter++}`;
-
-          // Create a filter element and add it to the filter container with the unique ID
-          const filterElement = `
-            <div class="sc-bkbkJK eraKfR" id="${filterId}">
-              <div class="sc-dlMDgC kpPvTx">
-                <span class="sc-kfYoZR lpaEYv">${filterText}</span>
-                <button class="sc-fKgJPI dBFPDH" data-filter-id="${filterId}">
-                  <img src="/fem-job-listings-with-filtering-react/static/media/icon-remove.70c075ce.svg" alt="remove filter">
-                </button>
-              </div>
-            </div>
-          `;
-          filterContainer.append(filterElement);
-
-          // Add an event listener to remove the filter when the remove button is clicked
-          filterContainer.find(`button[data-filter-id="${filterId}"]`).click(function () {
-            const filterIdToRemove = $(this).data("filter-id");
-            $(`#${filterIdToRemove}`).remove();
-
-            // After removing the filter, reapply the job listing filters
-            filterJobListings();
-          });
-
-          // After adding the filter, reapply the job listing filters
-          filterJobListings();
-        }
-      }
-
       // Add a click event listener to buttons with class 'button-rll'
       $(document).on("click", ".button-rll", function () {
         const filterText = $(this).text();
         addFilter(filterText);
       });
 
+      // Function to handle adding filters
+      function addFilter(filterText) {
+        const filterContainer = $(".filter-container");
+
+        // Check if the filter already exists in the filter container
+        const existingFilters = filterContainer.find(".sc-kfYoZR").map(function () {
+            return $(this).text();
+        }).get();
+
+        if (!existingFilters.includes(filterText)) {
+            // Generate a unique filter ID
+            const filterId = `filter-${filterIdCounter++}`;
+
+            // Create a filter element and add it to the filter container with the unique ID
+            const filterElement = `
+                <div class="eraKfR" id="${filterId}">
+                    <div class="kpPvTx">
+                        <span class="lpaEYv">${filterText}</span>
+                        <button class="dBFPDH" data-filter-id="${filterId}">
+                            <img src="./images/icon-remove.svg" alt="remove filter">
+                        </button>
+                    </div>
+                </div>
+            `;
+            filterContainer.append(filterElement);
+
+            // Add an event listener to remove the filter when the remove button is clicked
+            filterContainer.find(`button[data-filter-id="${filterId}"]`).click(function () {
+                const filterIdToRemove = $(this).data("filter-id");
+                $(`#${filterIdToRemove}`).remove();
+
+                // After removing the filter, reapply the job listing filters
+                filterJobListings();
+            });
+
+            // After adding the filter, reapply the job listing filters
+            filterJobListings();
+        }
+      }
+
+      // Add an event listener to buttons with class 'sc-fKgJPI dBFPDH' (for removing filters)
+      $(document).on("click", ".sc-fKgJPI.dBFPDH", function () {
+        const filterIdToRemove = $(this).data("filter-id");
+        $(`#${filterIdToRemove}`).remove();
+
+        // After removing the filter, reapply the job listing filters
+        filterJobListings();
+      });
+
+
       // Function to filter job listings based on selected filters
       function filterJobListings() {
         const selectedFilters = $(".filter-container .sc-kfYoZR").map(function () {
-          return $(this).text();
+            return $(this).text();
         }).get();
 
         // Loop through each job listing and check if it matches the selected filters
         $(".job-object").each(function () {
-          const job = $(this);
+            const job = $(this);
 
-          // Get the job's tags (role, level, languages, tools)
-          const jobTags = job.find(".button-rll").map(function () {
-            return $(this).text();
-          }).get();
+            // Get the job's tags (role, level, languages, tools)
+            const jobTags = job.find(".button-rll").map(function () {
+                return $(this).text();
+            }).get();
 
-          // Check if the job's tags match the selected filters
-          const isJobVisible = selectedFilters.every(function (filter) {
-            return jobTags.includes(filter);
-          });
+            // Check if the job's tags match the selected filters
+            const isJobVisible = selectedFilters.every(function (filter) {
+                return jobTags.includes(filter);
+            });
 
-          // Show or hide the job listing based on the filter matching
-          if (isJobVisible) {
-            job.show();
-          } else {
-            job.hide();
-          }
+            // Show or hide the job listing based on the filter matching
+            if (isJobVisible) {
+                job.show();
+            } else {
+                job.hide();
+            }
         });
       }
+
 
       // Function to show the job description popup
       function showJobDescription(job) {
@@ -222,8 +233,8 @@ $(document).ready(function () {
 
               // Create elements for job details
               const leftDiv = $("<div>").addClass("job-object-side");
-
-              const logoImg = $("<img>").attr("src", job.logo).attr("alt", `${job.company} Logo`).addClass("circular-avatar");
+              
+              const logoImg = $("<img>").attr("src", job.logo).attr("alt", `${job.logo} Logo`).addClass("circular-avatar");
 
               const infoDiv = $("<div>").addClass("job-object-left-desc");
 
@@ -296,25 +307,25 @@ $(document).ready(function () {
 
               container.append(rightDiv);
 
-              // // Add a remove button to each job object
-              // const removeButton = $("<button>").addClass("remove-button").text("Remove");
+              // Add a remove button to each job object
+              const removeButton = $("<button>").addClass("remove-button").text("Remove");
 
-              // // Add a click event listener to remove the job object when the button is clicked
-              // removeButton.click(function () {
-              //   container.remove(); // Remove the job object container
-              // });
+              // Add a click event listener to remove the job object when the button is clicked
+              removeButton.click(function () {
+                container.remove(); // Remove the job object container
+              });
 
-              // // Add a mouseover event listener to show the remove button on hover
-              // container.mouseover(function () {
-              //     removeButton.show(); // Show the remove button
-              // });
+              // Add a mouseover event listener to show the remove button on hover
+              container.mouseover(function () {
+                  removeButton.show(); // Show the remove button
+              });
 
-              // // Add a mouseout event listener to hide the remove button when not hovered
-              // container.mouseout(function () {
-              //     removeButton.hide(); // Hide the remove button
-              // });
+              // Add a mouseout event listener to hide the remove button when not hovered
+              container.mouseout(function () {
+                  removeButton.hide(); // Hide the remove button
+              });
 
-              // container.append(removeButton); // Append the remove button to the job object
+              container.append(removeButton); // Append the remove button to the job object
 
 
         return container;
@@ -473,6 +484,7 @@ $(document).ready(function () {
               const jobData = {
                   company: $("#company").val(),
                   position: $("#position").val(),
+                  logo:$('#logo').val(),
                   role: $("#role").val(),
                   level: $("#level").val(),
                   postedAt: $("#postedAt").val(),
