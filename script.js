@@ -6,6 +6,17 @@ $(document).ready(function () {
           $.each(data, function (index, job) {
               const container = $("<div>").addClass("job-object");
 
+              // Check if the job is both new and featured
+              const isNewAndFeatured = job.new && job.featured;
+
+              // Add the border-left and transition styles conditionally
+              if (isNewAndFeatured) {
+                  container.css({
+                      "border-left": "0.35em solid var(--desaturated-dark-cyan)",
+                      "transition": "background 0.3s ease"
+                  });
+              }
+
               // Create elements for job details
               const leftDiv = $("<div>").addClass("job-object-side");
 
@@ -230,6 +241,17 @@ $(document).ready(function () {
       // Define a function to create a job object container based on jobData
       function createJobObjectContainer(job) {
         const container = $("<div>").addClass("job-object");
+
+              // Check if the job is both new and featured
+              const isNewAndFeatured = job.new && job.featured;
+
+              // Add the border-left and transition styles conditionally
+              if (isNewAndFeatured) {
+                  container.css({
+                      "border-left": "0.35em solid var(--desaturated-dark-cyan)",
+                      "transition": "background 0.3s ease"
+                  });
+              }
 
               // Create elements for job details
               const leftDiv = $("<div>").addClass("job-object-side");
